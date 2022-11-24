@@ -13,10 +13,9 @@ void sig_handler(int signo) {
      }
  }
 /* Structure to hold the necessary parameters to pass into the threaded display_string function */
-     struct req {
-     int reqno;
-     int des;
-     char str[SIZE];
+     struct request {
+     int requestno;
+     char string[SIZE];
      socklen_t addlen;
      sockaddr_in clientaddr;
  };
@@ -49,13 +48,12 @@ void sig_handler(int signo) {
          std::cout << "\n\t Waiting on port " << ntohs(serveraddr.sin_port) << '\n';
          recvlen = recvfrom (fd, buffer,SIZE, 0, (sockaddr*) &clientaddr, &addrlen);
          msgcnt++;
-         req *obj = new req; //allocates new memory 
-         bzero (obj, sizeof (req));  //clears previous memory
-         obj->reqno = msgcnt;
+         request *obj = new request; //allocates new memory 
+         bzero (obj, sizeof (request));  //clears previous memory
+         obj->requestno = msgcnt;
          obj->addlen = addrlen;
          obj->clientaddr = clientaddr;
-         obj->des = fd;
-         strcpy (obj->str, buffer);
+         strcpy (obj->string, buffer);
 
          //creating threads
          pthread_create (&threads [threadno++], NULL, display, (void*)obj);
@@ -68,10 +66,9 @@ void sig_handler(int signo) {
  }
  void* display (void* obj) {
 
-     req rq = *((req*)obj); 
-     std::cout << "\n name of client:\t " << rq.str<<std::endl;
+     request rq = *((request*)obj); //type casting
+     std::cout << "\n name of client:\t " << rq.string<<std::endl;
 
-    std::cout << "(user: " << rq.reqno << ")" << '\n';
+    std::cout << "(user: " << rq.requestno << ")" << '\n';
      return NULL;
  }
-

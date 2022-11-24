@@ -48,7 +48,7 @@ void travel:: login()
   
  int fd;
  void sig_handler(int signo) {
-     if (signo == SIGINT) {
+     if (signo == SIGINT) {             //signal handler
          std::cout << "\t Exiting..." << '\n';
          close (fd);
          exit (1);
@@ -61,13 +61,13 @@ void travel:: login()
      int slen = sizeof (remaddr), recvlen;
      char buffer[BUFFER_SIZE]; 
      int rcvlen;
-     char *server = "127.0.0.1"; 
+     char *server = "127.0.0.1";         //server address
      if ((fd = socket (AF_INET, SOCK_DGRAM, 0)) == -1 ) {
          std::cout << "\n\t Socket creation failed...\n\t Exiting..." << '\n';
          return 0;
      }
-     signal(SIGINT, sig_handler); 
-     signal(SIGTSTP, sig_handler); 
+     signal(SIGINT, sig_handler);       //handle CTRL+C
+     signal(SIGTSTP, sig_handler);      //handle CTRL+Z
      std::cout << "\n\t Socket created..." << '\n';
      memset ((char*)&myaddr, 0, sizeof (myaddr));
      myaddr.sin_family = AF_INET; 
@@ -105,5 +105,4 @@ void travel:: login()
     t.menu();
    } 
     return 0;
-
-}
+ }
