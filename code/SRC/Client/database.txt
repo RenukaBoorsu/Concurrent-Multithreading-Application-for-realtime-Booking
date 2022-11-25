@@ -1,0 +1,11 @@
+lasya lasya54
+navya navya745
+renuka renuka123
+keerthi keerthi200
+Akshitha akshitha123
+@login 2022-11-22 21:01:11 | INFO    | user.cpp        | user_registration:15 | 
+Registration Sucessful
+
+@login 2022-11-22 21:01:11 | INFO    | user.cpp        | user_login:25 | please enter the following details to login
+@login 2022-11-22 21:01:11 | INFO    | user.cpp        | user_login:26 | USERNAME :
+@login 2022-11-22 21:01:17 | INFO    | user.cpp        | user_login:28 | PASSWORD :
